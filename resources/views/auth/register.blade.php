@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-
+                        <div class="d-grid gap-2">
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
@@ -66,6 +66,7 @@
                                     {{ __('Register') }}
                                 </button>
                             </div>
+                        </div>
                         </div>
                     </form>
                 </div>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Object\HomeController as ObjectHomeController;
 use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +18,16 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/object', [App\Http\Controllers\Object\HomeController::class, 'index'])->name('object');
+Route::get('object', [ObjectHomeController::class, 'index'])->name('object');
 
+Route::group(
+    [
+        'prefix'=> 'admin',
+        'as' => 'admin.',
+        'middleware' => ['auth'],
+    ],
+    function (){
+        Route::get('/', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+        Route::resource('users', UsersController::class);
+    }
+);

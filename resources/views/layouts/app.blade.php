@@ -27,7 +27,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
@@ -50,11 +50,16 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                    document.getElementById('settings-form').submit();">
+                                        {{ __('Настройки') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
@@ -74,12 +79,15 @@
     </header>
     <main class="app-content py-4">
         <div class="container">
+            @section('breadcrumbs', Breadcrumbs::render())
+            @yield('breadcrumbs')
+            @include('layouts.partials.flash')
             @yield('content')
         </div>
     </main>
     <footer>
         <div class="container">
-            <div class="border-top pt-3">
+            <div class="border-top pt-3 text-center">
                 <p>&copy; 2020 - {{ date('Y') }} Made by DB</p>
             </div>
         </div>
